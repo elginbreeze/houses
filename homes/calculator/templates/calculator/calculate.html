@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Property Feasibility</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://cdn.mlcalc.com/widget-api.js"></script>
+    <link href="http://cdn.mlcalc.com/themes/mlcalc/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		body {
+			padding: 20px;
+		}
+		.small {
+			font-size: 11px;
+		}
+	</style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div class="container">
+
+<div class="row">
+	<div class="span4">
+		<div class="page-header">
+			<h1>Mortgage Calculator</h1>
+		</div>
+		<form action="http://www.mlcalc.com/" method="post" onsubmit="return mlcalcCalculate(this)" class="form-horizontal">
+			<fieldset>
+				<input type="hidden" name="wl" value="en">
+				<div class="control-group">
+					<label class="control-label" for="ma">Purchase price:</label>
+					<div class="controls">
+						<div class="input-append">
+							<input type="text" id="ma" name="ma" class="input-small" value="250,000">
+		            		<span class="add-on">$</span>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="dp">Down payment:</label>
+					<div class="controls">
+						<div class="input-append">
+							<input type="text" id="dp" name="dp" class="input-mini" value="10">
+		            		<span class="add-on">%</span>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="mt">Mortgage term:</label>
+					<div class="controls">
+						<div class="input-append">
+							<input type="text" id="mt" name="mt" class="input-mini" value="30">
+		            		<span class="add-on">years</span>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="ir">Interest rate:</label>
+					<div class="controls">
+						<div class="input-append">
+							<input type="text" id="ir" name="ir" class="input-mini" value="4.5">
+		            		<span class="add-on">%</span>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="pt">Property tax:</label>
+					<div class="controls">
+						<div class="input-append">
+							<input type="text" id="pt" name="pt" class="input-mini" value="3,000">
+		            		<span class="add-on">$</span>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="pi">Property insurance:</label>
+					<div class="controls">
+						<div class="input-append">
+							<input type="text" id="pi" name="pi" class="input-mini" value="1,500">
+		            		<span class="add-on">$</span>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="mi">PMI:</label>
+					<div class="controls">
+						<div class="input-append">
+							<input type="text" id="mi" name="mi" class="input-mini" value="0.52">
+		            		<span class="add-on">%</span>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="sm">First payment date:</label>
+					<div class="controls">
+						<select name="sm" class="span1" id="sm">
+							<option label="Jan" value="1">Jan</option>
+							<option label="Feb" value="2">Feb</option>
+							<option label="Mar" value="3">Mar</option>
+							<option label="Apr" value="4">Apr</option>
+							<option label="May" value="5">May</option>
+							<option label="Jun" value="6">Jun</option>
+							<option label="Jul" value="7">Jul</option>
+							<option label="Aug" value="8">Aug</option>
+							<option label="Sep" value="9">Sep</option>
+							<option label="Oct" value="10">Oct</option>
+							<option label="Nov" value="11">Nov</option>
+							<option label="Dec" value="12">Dec</option>
+						</select>
+						<select name="sy" class="span1" id="sy">
+							<option label="2016" value="2016" selected="selected" >2016</option>
+							<option label="2017" value="2017">2017</option>
+							<option label="2018" value="2018">2018</option>
+							<option label="2019" value="2019">2019</option>
+							<option label="2020" value="2020">2020</option>
+							<option label="2021" value="2021">2021</option>
+							<option label="2022" value="2022">2022</option>
+							<option label="2023" value="2023">2023</option>
+							<option label="2024" value="2024">2024</option>
+							<option label="2025" value="2025">2025</option>
+							<option label="2026" value="2026">2026</option>
+							<option label="2027" value="2027">2027</option>
+							<option label="2028" value="2028">2028</option>
+							<option label="2029" value="2029">2029</option>
+							<option label="2030" value="2020">2030</option>
+							<option label="2031" value="2031">2031</option>
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="as">Amortization:</label>
+					<div class="controls">
+						<label class="radio">
+							<input type="radio" id="as1" name="as" class="input-mini" value="year" checked="checked">
+		            		show by year
+						</label>
+						<label class="radio">
+							<input type="radio" id="as2" name="as" class="input-mini" value="month">
+		            		show by month
+						</label>
+						<label class="radio">
+							<input type="radio" id="as3" name="as" class="input-mini" value="none">
+		            		don't show
+						</label>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Calculate</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div class="span4 offset1">
+		<div class="page-header">
+			<h1>Loan Calculator</h1>
+		</div>
+		<form action="http://www.mlcalc.com/" method="post" onsubmit="return mlcalcCalculate(this)" class="form-horizontal">
+			<fieldset>
+				<input type="hidden" name="wl" value="en">
+				<div class="control-group">
+					<label class="control-label" for="la">Loan amount:</label>
+					<div class="controls">
+						<div class="input-append">
+							<input type="text" id="la" name="la" class="input-small" value="150,000">
+		            		<span class="add-on">$</span>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="lt">Loan term:</label>
+					<div class="controls">
+						<div class="input-append">
+							<input type="text" id="lt" name="lt" class="input-mini" value="10">
+		            		<span class="add-on">years</span>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="ir">Interest rate:</label>
+					<div class="controls">
+						<div class="input-append">
+							<input type="text" id="ir" name="ir" class="input-mini" value="4.5">
+		            		<span class="add-on">%</span>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="sml">First payment date:</label>
+					<div class="controls">
+						<select name="sm" class="span1" id="sml">
+							<option label="Jan" value="1">Jan</option>
+							<option label="Feb" value="2">Feb</option>
+							<option label="Mar" value="3">Mar</option>
+							<option label="Apr" value="4">Apr</option>
+							<option label="May" value="5">May</option>
+							<option label="Jun" value="6">Jun</option>
+							<option label="Jul" value="7">Jul</option>
+							<option label="Aug" value="8">Aug</option>
+							<option label="Sep" value="9">Sep</option>
+							<option label="Oct" value="10">Oct</option>
+							<option label="Nov" value="11">Nov</option>
+							<option label="Dec" value="12">Dec</option>
+						</select>
+						<select name="sy" class="span1" id="syl">
+							<option label="2016" value="2016" selected="selected" >2016</option>
+							<option label="2017" value="2017">2017</option>
+							<option label="2018" value="2018">2018</option>
+							<option label="2019" value="2019">2019</option>
+							<option label="2020" value="2020">2020</option>
+							<option label="2021" value="2021">2021</option>
+							<option label="2022" value="2022">2022</option>
+							<option label="2023" value="2023">2023</option>
+							<option label="2024" value="2024">2024</option>
+							<option label="2025" value="2025">2025</option>
+							<option label="2026" value="2026">2026</option>
+							<option label="2027" value="2027">2027</option>
+							<option label="2028" value="2028">2028</option>
+							<option label="2029" value="2029">2029</option>
+							<option label="2030" value="2020">2030</option>
+							<option label="2031" value="2031">2031</option>
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="asl">Amortization:</label>
+					<div class="controls">
+						<label class="radio">
+							<input type="radio" id="asl1" name="as" class="input-mini" value="year" checked="checked">
+		            		show by year
+						</label>
+						<label class="radio">
+							<input type="radio" id="asl2" name="as" class="input-mini" value="month">
+		            		show by month
+						</label>
+						<label class="radio">
+							<input type="radio" id="asl3" name="as" class="input-mini" value="none">
+		            		don't show
+						</label>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Calculate</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+
+<footer style="visibility:hidden;">
+	<hr>
+	Powered by <a href="http://www.mlcalc.com/">Mortgage Calculator</a>
+</footer>
+
+</div>
+
+</body>
+</html>
